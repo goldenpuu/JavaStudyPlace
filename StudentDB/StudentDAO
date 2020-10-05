@@ -86,7 +86,7 @@ public class StudentDAO {
 		return isDone;
 	}
 	
-	// 조회
+	// 조회(lookup)
 	// 학생 한명의 정보를 조회하는 메서드
 	public StudentVO getStuVO(int studno) {
 		StudentVO vo = null;
@@ -103,6 +103,28 @@ public class StudentDAO {
 			System.out.println(e.toString());
 		}
 		return vo;
+	}
+	
+	//목록(list lookup)
+	//학생전체 목록 조회
+	public List<StudentVO> getStuList(){
+		List<StudentVO> list = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM student");
+			list = new ArrayList<StudentVO>();
+			while(rs.next()) {
+				StudentVO vo = new StudentVO();
+				vo.setStudno(rs.getInt("studno"));
+				vo.setName(rs.getString("name"));
+				vo.setId(rs.getString("id"));
+				vo.setJumin(rs.getString("jumin"));
+				list.add(vo);
+			}
+		}catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 	
 	public void close() {
