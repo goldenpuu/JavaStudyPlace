@@ -1,0 +1,30 @@
+package StudentDB;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class StudentDAO {
+	// 데이터 베이스 커넥션 객체 선언
+	Connection conn = null;
+	// SQL 실행할 객체
+	Statement stmt = null;
+	// SQL 실행결과를 담을 객체
+	ResultSet rs = null;
+	
+	public StudentDAO(String IP, String port, String ID, String pwd){//IP, port number, ID, password
+		try {
+			// MariaDB 드라이버 로드
+			Class.forName("org.mariadb.jdbc.Driver");
+			
+			conn = DriverManager.getConnection(
+					"jdbc:mariadb://"+IP+":"+port+"/aidb", 
+					ID,
+					pwd);
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		if(conn != null) {System.out.println("DB connection is Successfully done^^b");}
+	}
+}
