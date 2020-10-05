@@ -86,6 +86,25 @@ public class StudentDAO {
 		return isDone;
 	}
 	
+	// 조회
+	// 학생 한명의 정보를 조회하는 메서드
+	public StudentVO getStuVO(int studno) {
+		StudentVO vo = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM student WHERE studno = " + studno);
+			if(rs.next()) {
+				vo = new StudentVO();
+				vo.setStudno(rs.getInt("studno"));
+				vo.setName(rs.getString("name"));
+				vo.setId(rs.getString("id"));
+			}
+		}catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return vo;
+	}
+	
 	public void close() {
 		try {
 			if(conn != null) {conn.close();
