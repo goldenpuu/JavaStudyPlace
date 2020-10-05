@@ -5,5 +5,35 @@ public class StudentMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		StudentDAO stuDAO = new StudentDAO("localhost", "3306", "ai_user", "ai1234");
+		StudentVO vo = new StudentVO();
+		vo.setStudno(10);
+		vo.setName("홍길동");
+		vo.setId("honggildong");
+		vo.setGrade(3);
+		vo.setJumin("9876541234567");
+		
+		// insert
+//		if(stuDAO.insert(vo)) {
+//			System.out.println("insert 성공");
+//		}else {
+//			System.out.println("insert 실패");
+//		}
+		
+		// update
+//		vo.setName("고길동");
+//		if(stuDAO.update(vo)) {
+//			System.out.println("update 성공");
+//		}else {
+//			System.out.println("update 실패");
+//		}
+		
+		// delete
+//		if(stuDAO.delete(10)) {
+//			System.out.println("delete 성공");
+//		}else {
+//			System.out.println("delete 실패");
+//		}
+		
+		stuDAO.close();
 	}
 }
