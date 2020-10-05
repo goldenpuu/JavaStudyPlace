@@ -1,0 +1,9 @@
+package StudentDB;
+
+public class StudentMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		StudentDAO stuDAO = new StudentDAO("localhost", "3306", "ai_user", "ai1234");
+	}
+}
