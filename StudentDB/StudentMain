@@ -33,6 +33,20 @@ public class StudentMain {
 //		}else {
 //			System.out.println("delete 실패");
 //		}
+
+		// select and print
+//		StudentVO dummy = stuDAO.getStuVO(10);
+//		System.out.println(dummy.getStudno());
+//		System.out.println(dummy.getName());
+//		System.out.println(dummy.getId());
+		
+		// get student list look up
+//		List<StudentVO> list = stuDAO.getStuList();
+//		for(int i = 0; i < list.size(); i++) {
+//			System.out.println("학생번호 : " + list.get(i).getStudno()
+//					+ "학생 이름 : " + list.get(i).getName()
+//					+ "학생 아이디 : " + list.get(i).getId());
+//		}
 		
 		stuDAO.close();
 	}
