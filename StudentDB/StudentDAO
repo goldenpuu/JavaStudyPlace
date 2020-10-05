@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-// not done yet
-
 public class StudentDAO {
 	// 데이터 베이스 커넥션 객체 선언
 	Connection conn = null;
@@ -28,5 +26,79 @@ public class StudentDAO {
 			System.out.println(e.toString());
 		}
 		if(conn != null) {System.out.println("DB connection is Successfully done^^b");}
+	}
+	
+	// 등록
+	// 학생 정보를 입력받아 student 테이블에 insert, update, delete 메서드 선언
+	// insert query method
+	public boolean insert(StudentVO vo) {
+		boolean isDone = true;
+		String sql = "INSERT INTO student (studno, name, id, grade, jumin, birthday, tel,"
+				+ "height, weight, major1, major2, profno) VALUES("
+				+ vo.getStudno()+", '"
+				+ vo.getName()+ "', '"
+				+ vo.getId()+ "', "
+				+ vo.getGrade()+ ", '"
+				+ vo.getJumin()+ "', "
+				+"null,null,null,null,null,null,null)";
+		try {
+			stmt = conn.createStatement();
+			//stmt.executeQuery(sql); // insert, update, delete -> excuteUpdate() 실행
+			stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			isDone = false;
+			System.out.println(e.toString());
+		}
+		return isDone;
+	}
+	
+	// update query method
+	public boolean update(StudentVO vo) {
+		boolean isDone = true;
+		String sql = "UPDATE student SET name = '"
+				+ vo.getName()+"' WHERE studno = "
+				+ vo.getStudno();
+		// update student set name = '홍길동' where studno = 10
+		try {
+			stmt = conn.createStatement();
+			//stmt.executeQuery(sql); // insert, update, delete -> excuteUpdate() 실행
+			stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e.toString());
+			isDone = false;
+		}
+		return isDone;
+	}
+	
+	// delete query method
+	public boolean delete(int studno) {
+		boolean isDone = true;
+		String sql = "DELETE FROM student WHERE studno = " + studno;
+		// delete from student where studno = 10
+		try {
+			stmt = conn.createStatement();
+			//stmt.executeQuery(sql); // insert, update, delete -> excuteUpdate() 실행
+			stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			System.out.println(e.toString());
+			isDone = false;
+		}
+		return isDone;
+	}
+	
+	public void close() {
+		try {
+			if(conn != null) {conn.close();
+			try{if(conn.isClosed()) {System.out.println("Connection closing is successfully done ^^b");}}catch(Exception e) {System.out.println(e.toString());}
+			}
+			if(rs != null) {rs.close();
+			try{if(rs.isClosed()) {System.out.println("ResultSet closing is successfully done ^^b");}}catch(Exception e) {System.out.println(e.toString());}
+			}
+			if(stmt != null) {stmt.close();
+			try{if(stmt.isClosed()) {System.out.println("StateMent closing is successfully done ^^b");}}catch(Exception e) {System.out.println(e.toString());}
+			}
+		}catch(Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 }
