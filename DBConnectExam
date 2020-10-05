@@ -24,7 +24,7 @@ public class DBConnect {
 					"ai1234");
 			
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM student");
+			rs = stmt.executeQuery("SELECT * FROM student WHERE name like '김%'");// '김'으로 이름이 시작되는 사람을 불러옴
 			while(rs.next()) {//결과의 갯수 만큼 반복됨
 				System.out.println(rs.getString("name"));
 			}
