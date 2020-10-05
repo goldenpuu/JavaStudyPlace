@@ -1,0 +1,43 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DBConnect {
+	public static void main(String args[]) {
+		
+		// 데이터 베이스 커넥션 객체 선언
+		Connection conn = null;
+		// SQL 실행할 객체
+		Statement stmt = null;
+		// SQL 실행결과를 담을 객체
+		ResultSet rs = null;
+		
+		
+		try {
+			// MariaDB 드라이버 로드
+			Class.forName("org.mariadb.jdbc.Driver");
+			
+			conn = DriverManager.getConnection(
+					"jdbc:mariadb://localhost:3306/aidb", 
+					"ai_user",
+					"ai1234");
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM student");
+			while(rs.next()) {//결과의 갯수 만큼 반복됨
+				System.out.println(rs.getString("name"));
+			}
+			
+			
+			
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			try{conn.close();} catch(Exception e){}
+			try{stmt.close();} catch(Exception e){}
+			try{rs.close();} catch(Exception e){}
+		}
+		if(conn != null) {System.out.println("접속 성공");}
+	}
+}
