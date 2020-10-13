@@ -31,9 +31,10 @@ List<StudentVO> stuList = dao.getStuList();
 	<tr>
 		<td><%=stuList.get(i).getStudno() %></td>
 		<td><%=stuList.get(i).getName() %></td>
-		<td><%=stuList.get(i).getId() %></td>
+		<td><a href="detail.jsp?studno=<%=stuList.get(i).getStudno() %>"><%=stuList.get(i).getId() %></a></td>
 		<td><%=stuList.get(i).getGrade() %>학년</td>
 		<td><%=stuList.get(i).getTel() %></td>
+		<td><a href="delconfirm.jsp?studno=<%=stuList.get(i).getStudno() %>&name=<%=stuList.get(i).getName() %>">삭제</a></td>
 	</tr>
 	<%}
 	dao.close();%>
